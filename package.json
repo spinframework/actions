@@ -1,13 +1,13 @@
 {
   "name": "actions",
   "version": "1.0.0",
-  "description": "This provide actions for spin setup, build and push of spin apps, deploy to Fermyon Cloud",
+  "description": "This provide actions for spin setup, build and push of spin apps.",
   "scripts": {
     "build": "tsc",
     "format": "prettier --write '**/*.ts'",
     "format-check": "prettier --check '**/*.ts'",
     "lint": "eslint src/**/*.ts",
-    "package": "ncc build -o dist/spin/setup src/setup.ts && ncc build -o dist/spin/push src/push.ts && ncc build -o dist/spin/deploy src/deploy.ts && ncc build -o dist/spin/preview src/preview.ts",
+    "package": "ncc build -o dist/spin/setup src/setup.ts && ncc build -o dist/spin/push src/push.ts",
     "test": "jest",
     "all": "npm run build && npm run format && npm run package"
   },

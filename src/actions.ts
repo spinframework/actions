@@ -1,8 +1,6 @@
-import * as cloud from './cloud'
 import * as core from '@actions/core'
 import * as github from './github'
 import * as spin from './spin'
-import {context} from '@actions/github'
 
 const FERMYON_GITHUB_ORG = 'fermyon'
 const SPIN_GITHUB_REPO = 'spin'
@@ -24,16 +22,6 @@ export async function setup(): Promise<void> {
   if (pluginsList.length > 0) {
     await spin.installPlugins(pluginsList)
   }
-}
-
-export async function deploy(): Promise<string> {
-  const manifestFile = getManifestFile()
-  const kvPairs = getKeyValuePairs()
-  const variables = getDeployVariables()
-  await cloud.deploy(manifestFile, kvPairs, variables)
-
-  const manifest = spin.getAppManifest(manifestFile)
-  return getDomainForApp(manifest.name)
 }
 
 export async function build(): Promise<void> {
@@ -74,53 +62,6 @@ export async function registryLogin(): Promise<void> {
   )
 }
 
-export async function deployPreview(prNumber: number): Promise<string> {
-  const manifestFile = getManifestFile()
-  const spinConfig = spin.getAppManifest(manifestFile)
-
-  const realAppName = spinConfig.name
-  const previewAppName = `${realAppName}-pr-${prNumber}`
-
-  core.info(`🚀 deploying preview as ${previewAppName} to Fermyon Cloud`)
-  const kvPairs = getKeyValuePairs()
-  const variables = getDeployVariables()
-  await cloud.deployAs(previewAppName, manifestFile, kvPairs, variables)
-
-  const domain = await getDomainForApp(previewAppName)
-  const comment = `🚀 preview deployed successfully to Fermyon Cloud and available at ${domain}`
-  core.info(comment)
-
-  await github.updateComment(
-    context.repo.owner,
-    context.repo.repo,
-    prNumber,
-    comment
-  )
-
-  return domain
-}
-
-export async function undeployPreview(prNumber: number): Promise<void> {
-  const manifestFile = getManifestFile()
-  const spinConfig = spin.getAppManifest(manifestFile)
-
-  const previewAppName = `${spinConfig.name}-pr-${prNumber}`
-
-  const cloudClient = getCloudClient()
-
-  const apps = await cloudClient.getAllApps()
-  const thisPreviewExists = apps.find(item => item.name === previewAppName)
-
-  if (!thisPreviewExists) {
-    core.info(`no preview found for pr ${prNumber}`)
-    return
-  }
-
-  core.info(`cleaning up preview for pr ${prNumber}`)
-  await cloudClient.deleteAppById(thisPreviewExists.id)
-  core.info(`preview deployment removed successfully`)
-}
-
 export function getKeyValuePairs(): string[] {
   const rawKV = core.getInput('key_values')
   if (!rawKV) {
@@ -137,23 +78,4 @@ export function getDeployVariables(): string[] {
   }
 
   return rawVariables.split(/\r|\n/)
-}
-
-export async function getDomainForApp(appName: string): Promise<string> {
-  const cloudClient = getCloudClient()
-  const app = await cloudClient.getAppByName(appName)
-
-  if (app.domain && app.domain.name) {
-    return `https://${app.domain.name}`
-  }
-
-  return `https://${app.subdomain}`
-}
-
-export function getCloudClient(): cloud.Client {
-  const cloudToken = core.getInput('fermyon_token', {
-    required: true
-  })
-
-  return cloud.initClient(cloudToken)
 }
