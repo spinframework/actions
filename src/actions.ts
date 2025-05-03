@@ -2,14 +2,14 @@ import * as core from '@actions/core'
 import * as github from './github'
 import * as spin from './spin'
 
-const FERMYON_GITHUB_ORG = 'fermyon'
+const SPINFRAMEWORK_GITHUB_ORG = 'spinframework'
 const SPIN_GITHUB_REPO = 'spin'
 
 export async function setup(): Promise<void> {
   let version = core.getInput('version')
   if (!version || version === 'latest') {
     version = await github.getLatestRelease(
-      FERMYON_GITHUB_ORG,
+      SPINFRAMEWORK_GITHUB_ORG,
       SPIN_GITHUB_REPO
     )
   }
