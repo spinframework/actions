@@ -20737,13 +20737,13 @@ exports.getDeployVariables = exports.getKeyValuePairs = exports.registryLogin = 
 const core = __importStar(__nccwpck_require__(2186));
 const github = __importStar(__nccwpck_require__(978));
 const spin = __importStar(__nccwpck_require__(4066));
-const FERMYON_GITHUB_ORG = 'fermyon';
+const SPINFRAMEWORK_GITHUB_ORG = 'spinframework';
 const SPIN_GITHUB_REPO = 'spin';
 function setup() {
     return __awaiter(this, void 0, void 0, function* () {
         let version = core.getInput('version');
         if (!version || version === 'latest') {
-            version = yield github.getLatestRelease(FERMYON_GITHUB_ORG, SPIN_GITHUB_REPO);
+            version = yield github.getLatestRelease(SPINFRAMEWORK_GITHUB_ORG, SPIN_GITHUB_REPO);
         }
         yield spin.install(version);
         //todo: check compatibility with spin version
@@ -21099,7 +21099,7 @@ function getLatestRelease(owner, repo) {
         });
         const releases = allReleases.data.filter(item => !item.prerelease);
         if (releases.length === 0) {
-            throw new Error(`no releases found for fermyon/spin`);
+            throw new Error(`no releases found for spinframework/spin`);
         }
         return Promise.resolve(releases[0].tag_name);
     });
@@ -21279,7 +21279,7 @@ function download(version) {
         const binaryExtension = osPlatform === 'windows' ? '.exe' : '';
         const downloadBaseURL = process.env.SPIN_DOWNLOAD_BASE_URL
             ? process.env.SPIN_DOWNLOAD_BASE_URL
-            : `https://github.com/fermyon/spin/releases/download/${version}`;
+            : `https://github.com/spinframework/spin/releases/download/${version}`;
         const downloadUrl = `${downloadBaseURL}/spin-${version}-${osPlatform}-${osArch}${archiveExtension}`;
         yield downloader
             .getConfig(`spin${binaryExtension}`, downloadUrl, `spin${binaryExtension}`)

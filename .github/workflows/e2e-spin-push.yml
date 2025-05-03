@@ -74,7 +74,7 @@ jobs:
       - uses: bots-house/ghcr-delete-image-action@v1.1.0
         if: always()
         with:
-          owner: fermyon
+          owner: spinframework
           ## name: 'actions/actions-e2e-tests'
           name: "${{ github.event.repository.name }}/${{ env.SAMPLE_APP_IMAGE_NAME }}"
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -114,7 +114,7 @@ jobs:
       - uses: bots-house/ghcr-delete-image-action@v1.1.0
         if: always()
         with:
-          owner: fermyon
+          owner: spinframework
           ## name: 'actions/actions-e2e-tests'
           name: "${{ github.event.repository.name }}/${{ env.SAMPLE_APP_IMAGE_NAME }}"
           token: ${{ secrets.GITHUB_TOKEN }}
