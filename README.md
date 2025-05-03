@@ -125,7 +125,7 @@ jobs:
     runs-on: ubuntu-latest
     name: Build and push
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Setup `spin`
         uses: fermyon/actions/spin/setup@v1
@@ -183,7 +183,7 @@ jobs:
     runs-on: ubuntu-latest
     name: Build and deploy
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Setup `spin`
         uses: fermyon/actions/spin/setup@v1
@@ -249,7 +249,7 @@ jobs:
     runs-on: ubuntu-latest
     name: Build and deploy
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Setup `spin`
         uses: fermyon/actions/spin/setup@v1
