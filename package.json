@@ -21,7 +21,7 @@
     "setup",
     "spin"
   ],
-  "author": "spinframework maintainers",
+  "author": "The Spin Framework Contributors",
   "license": "Apache-2.0",
   "dependencies": {
     "@actions/core": "^1.10.0",
