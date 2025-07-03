@@ -17,7 +17,7 @@ export async function getLatestRelease(
 
   const releases = allReleases.data.filter(item => !item.prerelease)
   if (releases.length === 0) {
-    throw new Error(`no releases found for fermyon/spin`)
+    throw new Error(`no releases found for spinframework/spin`)
   }
 
   return Promise.resolve(releases[0].tag_name)

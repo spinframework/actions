@@ -1,6 +1,6 @@
-name: 'Setup Fermyon Spin'
+name: 'Setup spinframework/spin'
 description: 'Set up your GitHub Actions workflow with a specific version of spin'
-author: 'Fermyon Engineering'
+author: 'spinframework maintainers'
 inputs:
   version:
     required: false

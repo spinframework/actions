@@ -31,7 +31,7 @@ async function download(version: string): Promise<void> {
 
   const downloadBaseURL = process.env.SPIN_DOWNLOAD_BASE_URL
     ? process.env.SPIN_DOWNLOAD_BASE_URL
-    : `https://github.com/fermyon/spin/releases/download/${version}`
+    : `https://github.com/spinframework/spin/releases/download/${version}`
   const downloadUrl = `${downloadBaseURL}/spin-${version}-${osPlatform}-${osArch}${archiveExtension}`
   await downloader
     .getConfig(`spin${binaryExtension}`, downloadUrl, `spin${binaryExtension}`)
