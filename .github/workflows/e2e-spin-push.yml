@@ -43,7 +43,7 @@ jobs:
       - uses: actions/checkout@v5
 
       - name: Retrieve saved Github action
-        uses: actions/download-artifact@v5
+        uses: actions/download-artifact@v6
         with:
           name: spin-actions
           path: dist/spin/push/
@@ -87,7 +87,7 @@ jobs:
       - uses: actions/checkout@v5
 
       - name: Retrieve saved Github action
-        uses: actions/download-artifact@v5
+        uses: actions/download-artifact@v6
         with:
           name: spin-actions
           path: dist/spin/push/
