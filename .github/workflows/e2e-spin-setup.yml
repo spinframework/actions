@@ -25,7 +25,7 @@ jobs:
           NODE_OPTIONS: --openssl-legacy-provider
 
       - name: upload artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: setup-spin
           path: dist/spin/setup/index.js
