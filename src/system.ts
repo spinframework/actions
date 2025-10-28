@@ -29,7 +29,7 @@ export function getArch(): string {
       return 'arm'
     case 'arm64':
       return 'aarch64'
-    case 'x32':
+    case 'ia32':
       return '386'
     case 'x64':
       return 'amd64'
