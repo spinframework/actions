@@ -34,7 +34,7 @@
     "@types/uuid": "^9.0.1",
     "fs-extra": "^11.1.0",
     "toml": "^3.0.0",
-    "uuid": "^9.0.0"
+    "uuid": "^13.0.0"
   },
   "devDependencies": {
     "@types/node": "^20.9.0",
